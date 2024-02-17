@@ -1,17 +1,12 @@
-import hashlib
+""" Have I Been Pwned functionality for calling the API """
 import requests
+from password_wizard.utils.utils import sha1_hash
 
-class HIBP():
-    """ Have I Been Pwned functionality for calling the API """
-    def __init__(self) -> None:
-        self._api_endpoint = "https://api.pwnedpasswords.com/range/"
+HIBP_ENDPOINT = "https://api.pwnedpasswords.com/range/"
 
-    def hash(self, s: str) -> str:
-        return hashlib.sha1(s.encode()).hexdigest()
-
-    def getResults(self, password: str) -> list[str]:
-        hashed = self.hash(password)
-        chunk = hashed[:5]
-        headers = {"Add-Padding": "true"}
-        r = requests.get(self._api_endpoint + chunk, headers=headers)
-        return r.text.splitlines()
+def getResults(password: str) -> list[str]:
+    hashed = sha1_hash(password)
+    chunk = hashed[:5]
+    headers = {"Add-Padding": "true"}
+    r = requests.get(HIBP_ENDPOINT + chunk, headers=headers)
+    return r.text.splitlines()

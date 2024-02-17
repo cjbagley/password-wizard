@@ -1,3 +1,3 @@
-import unittest
-if __name__ == '__main__':
-    unittest.main()
+"""
+Tests for API module
+"""
