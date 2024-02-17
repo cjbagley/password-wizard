@@ -6,7 +6,7 @@ import sys
 
 from password_wizard.main import main
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:

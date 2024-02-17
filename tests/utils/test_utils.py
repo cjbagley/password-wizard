@@ -1,6 +1,7 @@
 from unittest import TestCase
 from password_wizard.utils.utils import sha1_hash
 
+
 class TestUtils(TestCase):
     def test_sha1hash(self):
         expected = "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8"
