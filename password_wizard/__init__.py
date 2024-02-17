@@ -1,0 +1,3 @@
+"""
+password_wizard module
+"""
