@@ -27,16 +27,16 @@ def get_matching_hashes(search_hash: str) -> list[str]:
     {matching hash remainder}:{count of times leaked}\n...
     """
     search_hash = search_hash.upper()
-    _check_search_hash(search_hash)
+    _check_search_hash(search_hash, 5)
     headers = {"Add-Padding": "true"}
     r = requests.get(HIBP_ENDPOINT + search_hash, headers=headers)
     return r.text.splitlines()
 
 
-def _check_search_hash(search_hash: str) -> None:
+def _check_search_hash(search_hash: str, length: int=5) -> None:
     """Helper function to check if string is in expected search hash format"""
-    if len(search_hash) != 5:
-        raise ValueError("Search hash must be the first 5 characters only")
+    if len(search_hash) != length:
+        raise ValueError(f"Search hash expecting {length} characters, {len(search_hash)} given")
     if re.match(r"^[A-F0-9]{5}$", search_hash) is None:
         raise ValueError(
             "Search hash given looks to be plain text - please provide a hash"
