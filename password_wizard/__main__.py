@@ -3,9 +3,11 @@ Main entrypoint for application
 Determines if CLI or GUI is being used
 """
 
+from cli import cli
+
 
 def main() -> None:
-    print("HI")
+    cli.handle()
 
 
 if __name__ == "__main__":
