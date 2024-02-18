@@ -17,6 +17,7 @@ import requests
 import re
 
 HIBP_ENDPOINT = "https://api.pwnedpasswords.com/range/"
+HIBP_EXCEPT_MSG = "Error with results given from HIBP API"
 
 
 def get_matching_hashes(search_hash: str) -> list[str]:
@@ -28,16 +29,50 @@ def get_matching_hashes(search_hash: str) -> list[str]:
     """
     search_hash = search_hash.upper()
     _check_search_hash(search_hash, 5)
+
     headers = {"Add-Padding": "true"}
     r = requests.get(HIBP_ENDPOINT + search_hash, headers=headers)
-    return r.text.splitlines()
+    r = r.text.splitlines()
+
+    if len(r) == 0:
+        raise ValueError(f"{HIBP_EXCEPT_MSG}: empty results given")
+    _check_result_format(r[0])
+
+    found = []
+    for result in r:
+        found.append(result.split(":"))
+
+    return found
 
 
-def _check_search_hash(search_hash: str, length: int=5) -> None:
-    """Helper function to check if string is in expected search hash format"""
+def get_matched_hash_count(hashed_password: str) -> int:
+    """Get the count of the times the search hash has been found"""
+    hashed_password = hashed_password.upper()
+    _check_search_hash(hashed_password, 40)
+    for result in get_matching_hashes(hashed_password[:5]):
+        if hashed_password == hashed_password[:5] + result[0]:
+            return int(result[1])
+
+    return 0
+
+
+def _check_search_hash(search_hash: str, length: int = 5) -> None:
+    """Helper to check if string is in expected search hash format"""
     if len(search_hash) != length:
-        raise ValueError(f"Search hash expecting {length} characters, {len(search_hash)} given")
-    if re.match(r"^[A-F0-9]{5}$", search_hash) is None:
+        raise ValueError(
+            f"Search hash expecting {length} characters, {len(search_hash)} given"
+        )
+
+    regex = re.compile(f"^[A-F0-9]{{{length}}}$")
+    if regex.match(search_hash) is None:
         raise ValueError(
             "Search hash given looks to be plain text - please provide a hash"
         )
+
+
+def _check_result_format(result: str) -> None:
+    """Helper to check if result given from API matches expected format"""
+    check = result.split(":")
+    _check_search_hash(check[0], 35)
+    if not int(check[1]) > 0:
+        raise ValueError(f"{HIBP_EXCEPT_MSG}: int expected")
