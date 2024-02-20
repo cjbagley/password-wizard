@@ -6,43 +6,41 @@ Options available:
 """
 
 import argparse
-from types import FunctionType
-from getpass import getpass
-from utils.utils import sha1_hash
-from api.hibp import get_matched_hash_count
+from cli.options.check import Check
+from cli.options.generate import Generate
+from cli.options.gui import Gui
 
 
-def handle():
+def handle() -> None:
     parser = argparse.ArgumentParser(description="Password Wizard CLI")
     subparsers = parser.add_subparsers(
-        help="Available Password Wizard functionality", title="Actions", required=True
+        dest="subparser_name",
+        help="Available Password Wizard functionality",
+        title="Actions",
+        required=True,
     )
 
-    _check = subparsers.add_parser(
-        "check", help="Enter a password to how many times it has been leaked"
-    )
-    _check.set_defaults(func=check)
-
-    _generate = subparsers.add_parser("generate", help="Generate a password")
-    _generate.set_defaults(func=generate)
-
-    _gui = subparsers.add_parser("gui", help="Open the Password Wizard GUI")
-    _gui.set_defaults(func=generate)
+    check = Check()
+    check.add_sub_parser(subparsers)
+    generate = Generate()
+    generate.add_sub_parser(subparsers)
+    gui = Gui()
+    gui.add_sub_parser(subparsers)
 
     args = parser.parse_args()
-    if isinstance(args.func, FunctionType):
-        args.func(args)
+    if not hasattr(args, "subparser_name"):
+        print("Please enter a valid option - see --help for further details")
+        exit(1)
 
+    match args.subparser_name:
+        case "check":
+            check.execute(args)
+        case "generate":
+            generate.execute(args)
+        case "gui":
+            gui.execute(args)
+        case _:
+            print("Please enter a valid option - see --help for further details")
+            exit(1)
 
-def generate(args):
-    print("GENERATE")
-
-
-def check(args):
-    pw = sha1_hash(getpass(prompt="Please enter password to check: "))
-    count = get_matched_hash_count(pw)
-    print(f"This password has been found {count} times")
-
-
-def gui(args):
-    print("GUI")
+    exit(0)
