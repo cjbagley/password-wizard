@@ -4,14 +4,15 @@ Options available:
     - generate: This will randomly generate a password
     - gui: This will open the Password Wizard GUI
 """
-
+import sys
 import argparse
-from cli.options.check import Check
-from cli.options.generate import Generate
-from cli.options.gui import Gui
+from password_wizard.cli.options.check import Check
+from password_wizard.cli.options.generate import Generate
+from password_wizard.cli.options.gui import Gui
 
 
 def handle() -> None:
+    """Handle the arguments given by the user via CLI"""
     parser = argparse.ArgumentParser(description="Password Wizard CLI")
     subparsers = parser.add_subparsers(
         dest="subparser_name",
@@ -30,7 +31,7 @@ def handle() -> None:
     args = parser.parse_args()
     if not hasattr(args, "subparser_name"):
         print("Please enter a valid option - see --help for further details")
-        exit(1)
+        sys.exit(1)
 
     match args.subparser_name:
         case "check":
@@ -41,6 +42,6 @@ def handle() -> None:
             gui.execute(args)
         case _:
             print("Please enter a valid option - see --help for further details")
-            exit(1)
+            sys.exit(1)
 
-    exit(0)
+    sys.exit(0)

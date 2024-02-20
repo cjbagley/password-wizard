@@ -13,8 +13,8 @@
     If a match has been found: that password has been leaked at some point.
 """
 
-import requests
 import re
+import requests
 
 HIBP_ENDPOINT = "https://api.pwnedpasswords.com/range/"
 HIBP_EXCEPT_MSG = "Error with results given from HIBP API"
@@ -31,7 +31,7 @@ def get_matching_hashes(search_hash: str) -> list[str]:
     _check_search_hash(search_hash, 5)
 
     headers = {"Add-Padding": "true"}
-    r = requests.get(HIBP_ENDPOINT + search_hash, headers=headers)
+    r = requests.get(HIBP_ENDPOINT + search_hash, headers=headers, timeout=5)
     r = r.text.splitlines()
 
     if len(r) == 0:
@@ -74,5 +74,5 @@ def _check_result_format(result: str) -> None:
     """Helper to check if result given from API matches expected format"""
     check = result.split(":")
     _check_search_hash(check[0], 35)
-    if not int(check[1]) > 0:
+    if int(check[1]) <= 0:
         raise ValueError(f"{HIBP_EXCEPT_MSG}: int expected")

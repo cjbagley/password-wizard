@@ -1,11 +1,23 @@
-from cli.options.abstract_option import AbstractOption
+""" Check Option - used to compare a given password against 'Have I Been Pwned' list """
 from argparse import Namespace, _SubParsersAction
 from getpass import getpass
-from utils.utils import sha1_hash
-from api.hibp import get_matched_hash_count
+from password_wizard.cli.options.abstract_option import AbstractOption
+from password_wizard.utils.utils import sha1_hash
+from password_wizard.api.hibp import get_matched_hash_count
 
 
 class Check(AbstractOption):
+    """Check Class
+    Subcommand: check
+    Parser Options:
+        - None
+    Execute: Ask the user to enter a password. This password is then
+    checked against the 'Have I been Pwned' records to see if it has
+    been leaked, and the amount of times printed to the command line.
+    If it has never been leaked, it will show as having been found
+    0 times.
+    """
+
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
         subparser.add_parser(
             "check", help="Enter a password to how many times it has been leaked"
