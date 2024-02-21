@@ -29,10 +29,18 @@ class Generate(AbstractOption):
             "-ns",
             help="""do no use any special characters in the password, overriding
             any special characters given with the -s flag""",
-            action="store_true",
+            default=True,
+            action="store_false",
         )
 
     def execute(self, args: Namespace) -> int:
         generator = PasswordGenerator()
+        if hasattr(args, "l"):
+            generator.set_length(args.l)
+        if hasattr(args, "s") and args.s is not None:
+            generator.set_special_characters(args.s)
+        if hasattr(args, "ns") and args.ns is False:
+            generator.set_use_special_characters(args.ns)
+
         print(generator.generate())
         return 0

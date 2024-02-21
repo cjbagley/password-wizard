@@ -20,7 +20,7 @@ class PasswordGenerator:
 
     def set_length(self, length: int) -> None:
         """Set the length of the generated password"""
-        self._length = length
+        self._length = int(length)
 
     def set_special_characters(self, chars: str) -> None:
         """Set the list of special chars to use in the password"""
@@ -28,7 +28,7 @@ class PasswordGenerator:
 
     def set_use_special_characters(self, should_use: bool) -> None:
         """Do not use any special characters"""
-        self._use_special_chrs = should_use
+        self._use_special_chrs = bool(should_use)
 
     def set_seed(self, seed: int = 0) -> None:
         """Set the random seed, to be used when testing"""
@@ -39,11 +39,11 @@ class PasswordGenerator:
         Uses the class options to determine what the password
         should contain.
         """
-        password = ""
         chrs = self._chr_list
         if self._use_special_chrs:
             chrs += self._special_chr_list
 
+        password = ""
         for _ in range(self._length):
             password += random.choice(chrs)
 
