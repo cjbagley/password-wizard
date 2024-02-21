@@ -8,7 +8,8 @@ class Generate(AbstractOption):
     """Generate Class
     Subcommand: generate
     Parser Options:
-        - None
+        -l - length of password
+        -s - what symbol characters to use. If not set, use full punctuation list.
     Execute: Output a password to the command line, based on the selected
     generation options.
     """
@@ -19,7 +20,9 @@ class Generate(AbstractOption):
             "-l", help="length of the generated password (default: 18)", default=18
         )
         g.add_argument(
-            "-s", help="the number of symbol characters to use (default: 4)", default=4
+            "-s",
+            help="""specify the list of special characters to choose from, for example
+            '#!_'. If not set, the full punctuation list will be used.""",
         )
 
     def execute(self, args: Namespace) -> int:
