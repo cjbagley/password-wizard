@@ -18,9 +18,13 @@ class Check(AbstractOption):
     0 times.
     """
 
+    def get_command_name(self) -> str:
+        return "check"
+
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
         subparser.add_parser(
-            "check", help="Enter a password to how many times it has been leaked"
+            self.get_command_name(),
+            help="Enter a password to how many times it has been leaked",
         )
 
     def execute(self, args: Namespace) -> int:

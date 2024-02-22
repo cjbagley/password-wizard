@@ -15,8 +15,11 @@ class GenerateString(AbstractOption):
     generation options.
     """
 
+    def get_command_name(self) -> str:
+        return "generate-string"
+
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
-        g = subparser.add_parser("generate-string", help="Generate a password")
+        g = subparser.add_parser(self.get_command_name(), help="Generate a password")
         g.add_argument(
             "-l", help="length of the generated password (default: 18)", default=18
         )

@@ -11,8 +11,13 @@ class Gui(AbstractOption):
     Execute: Start the GUI for the user.
     """
 
+    def get_command_name(self) -> str:
+        return "gui"
+
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
-        subparser.add_parser("gui", help="Open the Password Wizard GUI")
+        subparser.add_parser(
+            self.get_command_name(), help="Open the Password Wizard GUI"
+        )
 
     def execute(self, args: Namespace) -> int:
         return 0

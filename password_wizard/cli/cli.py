@@ -21,27 +21,20 @@ def handle() -> None:
         required=True,
     )
 
-    check = Check()
-    check.add_sub_parser(subparsers)
-    generate = GenerateString()
-    generate.add_sub_parser(subparsers)
-    gui = Gui()
-    gui.add_sub_parser(subparsers)
+    options = [Check(), GenerateString(), Gui()]
+
+    for opt in options:
+        opt.add_sub_parser(subparsers)
 
     args = parser.parse_args()
     if not hasattr(args, "subparser_name"):
         print("Please enter a valid option - see --help for further details")
         sys.exit(1)
 
-    match args.subparser_name:
-        case "check":
-            check.execute(args)
-        case "generate-string":
-            generate.execute(args)
-        case "gui":
-            gui.execute(args)
-        case _:
-            print("Please enter a valid option - see --help for further details")
-            sys.exit(1)
+    for opt in options:
+        if opt.get_command_name() == args.subparser_name:
+            opt.execute(args)
+            sys.exit(0)
 
-    sys.exit(0)
+    print("Please enter a valid option - see --help for further details")
+    sys.exit(1)
