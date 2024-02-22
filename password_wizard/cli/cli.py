@@ -4,8 +4,8 @@ Options available:
     - generate: This will randomly generate a password
     - gui: This will open the Password Wizard GUI
 """
-import sys
 import argparse
+import sys
 from password_wizard.cli.options.check import Check
 from password_wizard.cli.options.generate_string import GenerateString
 from password_wizard.cli.options.gui import Gui
@@ -33,8 +33,8 @@ def handle() -> None:
 
     for opt in options:
         if opt.get_command_name() == args.subparser_name:
-            opt.execute(args)
-            sys.exit(0)
+            exit_code: int = opt.execute(args)
+            sys.exit(exit_code)
 
     print("Please enter a valid option - see --help for further details")
     sys.exit(1)
