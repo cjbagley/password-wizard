@@ -7,7 +7,7 @@ Options available:
 import sys
 import argparse
 from password_wizard.cli.options.check import Check
-from password_wizard.cli.options.generate import Generate
+from password_wizard.cli.options.generate_string import GenerateString
 from password_wizard.cli.options.gui import Gui
 
 
@@ -23,7 +23,7 @@ def handle() -> None:
 
     check = Check()
     check.add_sub_parser(subparsers)
-    generate = Generate()
+    generate = GenerateString()
     generate.add_sub_parser(subparsers)
     gui = Gui()
     gui.add_sub_parser(subparsers)
@@ -36,7 +36,7 @@ def handle() -> None:
     match args.subparser_name:
         case "check":
             check.execute(args)
-        case "generate":
+        case "generate-string":
             generate.execute(args)
         case "gui":
             gui.execute(args)

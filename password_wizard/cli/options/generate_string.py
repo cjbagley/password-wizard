@@ -4,7 +4,7 @@ from password_wizard.cli.options.abstract_option import AbstractOption
 from password_wizard.utils.password_generator import PasswordGenerator
 
 
-class Generate(AbstractOption):
+class GenerateString(AbstractOption):
     """Generate Class
     Subcommand: generate
     Parser Options:
@@ -16,7 +16,7 @@ class Generate(AbstractOption):
     """
 
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
-        g = subparser.add_parser("generate", help="Generate a password")
+        g = subparser.add_parser("generate-string", help="Generate a password")
         g.add_argument(
             "-l", help="length of the generated password (default: 18)", default=18
         )
