@@ -6,10 +6,18 @@ Options available:
 """
 import argparse
 import sys
+from typing import NoReturn
 from password_wizard.cli.options.abstract_option import AbstractOption
 from password_wizard.cli.options.check import Check
 from password_wizard.cli.options.generate_string import GenerateString
 from password_wizard.cli.options.gui import Gui
+
+
+class ArgumentParser(argparse.ArgumentParser):
+    """Custom argument parsing error handling"""
+
+    def error(self, message: str) -> NoReturn:
+        raise ValueError(f"Error: {message}")
 
 
 def get_options() -> list[AbstractOption]:
@@ -19,7 +27,7 @@ def get_options() -> list[AbstractOption]:
 
 def get_option_parser(options: list[AbstractOption]) -> argparse.ArgumentParser:
     """Return a argparse parser based on provided options"""
-    parser = argparse.ArgumentParser(description="Password Wizard CLI")
+    parser = ArgumentParser(description="Password Wizard CLI")
     subparsers = parser.add_subparsers(
         dest="subparser_name",
         help="Available Password Wizard functionality",
@@ -36,7 +44,12 @@ def handle() -> None:
     """Handle the actions required based on CLI args given"""
     options = get_options()
     parser = get_option_parser(options)
-    args = parser.parse_args()
+    try:
+        args = parser.parse_args()
+    except ValueError as e:
+        print(e)
+        sys.exit(1)
+
     if not hasattr(args, "subparser_name"):
         print("Please enter a valid option - see --help for further details")
         sys.exit(1)
