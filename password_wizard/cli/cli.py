@@ -43,8 +43,10 @@ def handle() -> None:
 
     for opt in options:
         if opt.get_command_name() == args.subparser_name:
-            exit_code: int = opt.execute(args)
-            sys.exit(exit_code)
+            result = opt.execute(args)
+            if result.output:
+                print(result.output)
+            sys.exit(result.exit_code)
 
     print("Please enter a valid option - see --help for further details")
     sys.exit(1)

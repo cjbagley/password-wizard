@@ -1,6 +1,6 @@
 """ GUI Option - start the GUI interface """
 from argparse import Namespace, _SubParsersAction
-from password_wizard.cli.options.abstract_option import AbstractOption
+from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
 
 
 class Gui(AbstractOption):
@@ -19,5 +19,8 @@ class Gui(AbstractOption):
             self.get_command_name(), help="Open the Password Wizard GUI"
         )
 
-    def execute(self, args: Namespace) -> int:
-        return 0
+    def execute(self, args: Namespace) -> ExecuteResult:
+        return ExecuteResult(
+            exit_code=0,
+            output="GUI started...",
+        )

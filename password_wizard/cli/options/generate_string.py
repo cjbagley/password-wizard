@@ -1,7 +1,7 @@
 """ GenerateString Option - used to generate a password """
 import string
 from argparse import Namespace, _SubParsersAction
-from password_wizard.cli.options.abstract_option import AbstractOption
+from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
 from password_wizard.utils.password_generator import PasswordGenerator
 
 
@@ -64,12 +64,14 @@ class GenerateString(AbstractOption):
             action="store_false",
         )
 
-    def execute(self, args: Namespace) -> int:
+    def execute(self, args: Namespace) -> ExecuteResult:
         generator = PasswordGenerator()
         if hasattr(args, "length"):
             if args.length < MIN_LENGTH or args.length > MAX_LENGTH:
-                print(f"Length specified must be between {MIN_LENGTH} and {MAX_LENGTH}")
-                return 1
+                return ExecuteResult(
+                    exit_code=1,
+                    output=f"Length specified must be between {MIN_LENGTH} and {MAX_LENGTH}",
+                )
             generator.set_length(args.length)
         if args.special_chars:
             chars = self.get_special_char_input()
@@ -77,8 +79,7 @@ class GenerateString(AbstractOption):
         if args.no_special_chars is False:
             generator.set_use_special_characters(args.no_special_chars)
 
-        print(generator.generate())
-        return 0
+        return ExecuteResult(exit_code=0, output=generator.generate())
 
     def get_special_char_input(self) -> str:
         """Get special characters to use from user input"""

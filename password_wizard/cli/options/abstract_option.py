@@ -1,6 +1,9 @@
 """ Abstract Option - abstract template for other option classes """
 from argparse import Namespace, _SubParsersAction
 from abc import ABC, abstractmethod
+from collections import namedtuple
+
+ExecuteResult = namedtuple("ExecuteResult", ["exit_code", "output"])
 
 
 class AbstractOption(ABC):
@@ -25,7 +28,8 @@ class AbstractOption(ABC):
         """
 
     @abstractmethod
-    def execute(self, args: Namespace) -> int:
+    def execute(self, args: Namespace) -> ExecuteResult:
         """Used to perform any actions based on the CLI input
-        given by the user.
+        given by the user. Returns the results in the form
+        of a named tuple.
         """
