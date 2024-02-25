@@ -1,6 +1,7 @@
 """ GeneratePassphrase Option - used to generate a passphrase """
 from argparse import Namespace, _SubParsersAction
 from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
+from password_wizard.utils.passphrase_generator import PassphraseGenerator
 
 
 DEFAULT_WORDS = 4
@@ -39,4 +40,12 @@ class GeneratePassphrase(AbstractOption):
         )
 
     def execute(self, args: Namespace) -> ExecuteResult:
-        return ExecuteResult(exit_code=1, output="Not currently implemented")
+        generator = PassphraseGenerator()
+        if hasattr(args, "words"):
+            if args.words < MIN_WORDS or args.words > MAX_WORDS:
+                return ExecuteResult(
+                    exit_code=1,
+                    output=f"Words specified must be between {MIN_WORDS} and {MAX_WORDS}",
+                )
+            generator.set_words(args.words)
+        return ExecuteResult(exit_code=0, output=generator.generate())

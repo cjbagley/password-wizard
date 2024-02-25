@@ -9,6 +9,7 @@ import sys
 from typing import NoReturn
 from password_wizard.cli.options.abstract_option import AbstractOption
 from password_wizard.cli.options.check import Check
+from password_wizard.cli.options.generate_passphrase import GeneratePassphrase
 from password_wizard.cli.options.generate_string import GenerateString
 from password_wizard.cli.options.gui import Gui
 
@@ -22,7 +23,7 @@ class ArgumentParser(argparse.ArgumentParser):
 
 def get_options() -> list[AbstractOption]:
     """Get a list of the available CLI option classes"""
-    return [Check(), GenerateString(), Gui()]
+    return [Check(), GenerateString(), Gui(), GeneratePassphrase()]
 
 
 def get_option_parser(options: list[AbstractOption]) -> argparse.ArgumentParser:

@@ -25,4 +25,14 @@ class PassphraseGenerator:
         Uses the class options to determine what the passphrase
         should contain.
         """
-        return ""
+        wordlist = self.get_wordlist("./../wordlist.txt")
+        words = wordlist.lower().split()
+        passphrase = ""
+        for _ in range(self._words):
+            passphrase += random.choice(words).title()
+        return passphrase
+
+    def get_wordlist(self, filepath) -> str:
+        """Load wordlist from given filepath"""
+        with open(file=filepath, mode="r", encoding="utf-8") as f:
+            return f.read()
