@@ -2,6 +2,7 @@ import re
 from unittest import TestCase
 from unittest.mock import patch
 from password_wizard.cli.options.check import Check
+from password_wizard.cli.options.generate_passphrase import GeneratePassphrase
 from password_wizard.cli.options.generate_string import GenerateString
 from password_wizard.cli.cli import get_option_parser
 
@@ -35,3 +36,11 @@ class TestCLI(TestCase):
         self.assertIsNotNone(
             re.search("^This password has been found \\d+ times", output.output)
         )
+
+    def test_generate_passphrase(self) -> None:
+        option = GeneratePassphrase()
+        parser = get_option_parser([option])
+
+        args = parser.parse_args([option.get_command_name()])
+        output = option.execute(args)
+        self.assertTrue(output.exit_code == 0)
