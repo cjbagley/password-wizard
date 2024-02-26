@@ -20,7 +20,7 @@ HIBP_ENDPOINT = "https://api.pwnedpasswords.com/range/"
 HIBP_EXCEPT_MSG = "Error with results given from HIBP API"
 
 
-def get_matching_hashes(search_hash: str) -> list[str]:
+def _get_matching_hashes(search_hash: str) -> list[str]:
     """Call HIBP API to find any matching hashes
 
     Results from the API come as a text string:
@@ -49,7 +49,7 @@ def get_matched_hash_count(hashed_password: str) -> int:
     """Get the count of the times the search hash has been found"""
     hashed_password = hashed_password.upper()
     _check_search_hash(hashed_password, 40)
-    for result in get_matching_hashes(hashed_password[:5]):
+    for result in _get_matching_hashes(hashed_password[:5]):
         if hashed_password == hashed_password[:5] + result[0]:
             return int(result[1])
 

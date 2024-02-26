@@ -2,11 +2,12 @@
 from argparse import Namespace, _SubParsersAction
 from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
 from password_wizard.utils.passphrase_generator import PassphraseGenerator
+from password_wizard.utils.retry import find_non_leaked_password
 
 
 DEFAULT_WORDS = 4
-MIN_WORDS = 3
 MAX_WORDS = 8
+MIN_WORDS = 3
 
 
 class GeneratePassphrase(AbstractOption):
@@ -64,7 +65,8 @@ class GeneratePassphrase(AbstractOption):
         if args.separator:
             separator = self.get_separator_input()
             generator.set_separator(separator)
-        return ExecuteResult(exit_code=0, output=generator.generate())
+
+        return find_non_leaked_password(generator.generate)
 
     def get_separator_input(self) -> str:
         """Get special characters to use from user input"""

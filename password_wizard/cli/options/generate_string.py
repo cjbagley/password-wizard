@@ -3,11 +3,12 @@ import string
 from argparse import Namespace, _SubParsersAction
 from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
 from password_wizard.utils.password_generator import PasswordGenerator
+from password_wizard.utils.retry import find_non_leaked_password
 
 
 DEFAULT_LENGTH = 18
-MIN_LENGTH = 5
 MAX_LENGTH = 20
+MIN_LENGTH = 5
 PUNCTUATION = string.punctuation.replace("%", "%%")
 
 
@@ -79,7 +80,7 @@ class GenerateString(AbstractOption):
         if args.no_special_chars is False:
             generator.set_use_special_characters(args.no_special_chars)
 
-        return ExecuteResult(exit_code=0, output=generator.generate())
+        return find_non_leaked_password(generator.generate)
 
     def get_special_char_input(self) -> str:
         """Get special characters to use from user input"""
