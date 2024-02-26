@@ -38,6 +38,18 @@ class GeneratePassphrase(AbstractOption):
             dest="words",
             type=int,
         )
+        g.add_argument(
+            "-s",
+            "--separator",
+            help=f"""Specify a separator between words. No value should be given,
+            and a separate prompt will appear in which to enter a separator to use.
+            The first given separator will be used.
+            (default: No separator)
+            """,
+            default="",
+            dest="separator",
+            action="store_true",
+        )
 
     def execute(self, args: Namespace) -> ExecuteResult:
         generator = PassphraseGenerator()
@@ -48,4 +60,11 @@ class GeneratePassphrase(AbstractOption):
                     output=f"Words specified must be between {MIN_WORDS} and {MAX_WORDS}",
                 )
             generator.set_words(args.words)
+        if args.separator:
+            separator = self.get_separator_input()
+            generator.set_separator(separator)
         return ExecuteResult(exit_code=0, output=generator.generate())
+    
+    def get_separator_input(self) -> str:
+        """Get special characters to use from user input"""
+        return input("Separator to use: ")

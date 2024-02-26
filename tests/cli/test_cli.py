@@ -37,10 +37,14 @@ class TestCLI(TestCase):
             re.search("^This password has been found \\d+ times", output.output)
         )
 
-    def test_generate_passphrase(self) -> None:
+    @patch("password_wizard.cli.options.generate_passphrase.input", return_value="-")
+    def test_generate_passphrase(self, mock) -> None:
         option = GeneratePassphrase()
         parser = get_option_parser([option])
 
         args = parser.parse_args([option.get_command_name()])
         output = option.execute(args)
         self.assertTrue(output.exit_code == 0)
+        
+        args = parser.parse_args([option.get_command_name(), "-s"])
+        output = option.execute(args)
