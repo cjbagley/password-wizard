@@ -45,6 +45,6 @@ class TestCLI(TestCase):
         args = parser.parse_args([option.get_command_name()])
         output = option.execute(args)
         self.assertTrue(output.exit_code == 0)
-        
+
         args = parser.parse_args([option.get_command_name(), "-s"])
         output = option.execute(args)

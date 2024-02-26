@@ -18,6 +18,7 @@ class PassphraseGenerator:
         self._words = int(words)
 
     def set_separator(self, separator: str):
+        """Set a separator to use between words"""
         if separator == "":
             self._separator = ""
             return

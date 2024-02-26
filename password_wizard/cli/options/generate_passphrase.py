@@ -14,6 +14,7 @@ class GeneratePassphrase(AbstractOption):
     Subcommand: generate-passphrase
     Parser Options:
         -w  - number of words to use
+        -s  - separator to use between words
     Execute: Output a passphrase to the command line, based on the selected
     generation options. A passphrase is a password string made from words,
     e.g. "HouseCanTrumpetNose".
@@ -41,7 +42,7 @@ class GeneratePassphrase(AbstractOption):
         g.add_argument(
             "-s",
             "--separator",
-            help=f"""Specify a separator between words. No value should be given,
+            help="""Specify a separator between words. No value should be given,
             and a separate prompt will appear in which to enter a separator to use.
             The first given separator will be used.
             (default: No separator)
@@ -64,7 +65,7 @@ class GeneratePassphrase(AbstractOption):
             separator = self.get_separator_input()
             generator.set_separator(separator)
         return ExecuteResult(exit_code=0, output=generator.generate())
-    
+
     def get_separator_input(self) -> str:
         """Get special characters to use from user input"""
         return input("Separator to use: ")

@@ -15,7 +15,7 @@ class TestPassphraseGenerator(TestCase):
 
         result = self.generator.generate()
         self.assertNotEqual("", result)
-    
+
     def test_set_separator(self) -> None:
         self.assertEqual("", self.generator._separator)
         self.generator.set_separator("-")
