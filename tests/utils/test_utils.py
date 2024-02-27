@@ -11,3 +11,7 @@ class TestUtils(TestCase):
         expected = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3"
         result = sha1_hash("test")
         self.assertEqual(result, expected)
+
+        expected = "c036b4e434a3d4b6117e3f609b1d678ff7ff344c"
+        result = sha1_hash("LongerStringWithCaps")
+        self.assertEqual(result, expected)
