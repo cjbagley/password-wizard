@@ -1,6 +1,6 @@
 """ Password Generator - Used to generate a password based on selected options """
 
-import random
+import secrets
 import string
 
 
@@ -30,10 +30,6 @@ class PasswordGenerator:
         """Do not use any special characters"""
         self._use_special_chrs = bool(should_use)
 
-    def set_seed(self, seed: int = 0) -> None:
-        """Set the random seed, to be used when testing"""
-        random.seed(seed)
-
     def generate(self) -> str:
         """Return a randomly generated password
         Uses the class options to determine what the password
@@ -43,8 +39,4 @@ class PasswordGenerator:
         if self._use_special_chrs:
             chrs += self._special_chr_list
 
-        password = ""
-        for _ in range(self._length):
-            password += random.choice(chrs)
-
-        return password
+        return "".join(secrets.choice(chrs) for _ in range(self._length))
