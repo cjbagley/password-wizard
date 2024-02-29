@@ -12,7 +12,7 @@ class Check(AbstractOption):
     Parser Options:
         - None
     Execute: Ask the user to enter a password. This password is then
-    checked against the 'Have I been Pwned' records to see if it has
+    checked against the 'Have I Been Pwned' records to see if it has
     been leaked, and the amount of times printed to the command line.
     If it has never been leaked, it will show as having been found
     0 times.
@@ -24,7 +24,8 @@ class Check(AbstractOption):
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
         subparser.add_parser(
             self.get_command_name(),
-            help="Enter a password to how many times it has been leaked",
+            help="""Enter a password to see how many times it has been leaked,
+            based on data obtained from 'Have I Been Pwned'""",
         )
 
     def execute(self, args: Namespace) -> ExecuteResult:

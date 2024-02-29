@@ -1,4 +1,4 @@
-""" GenerateString Option - used to generate a password """
+""" Password Option - used to generate a password """
 import string
 from argparse import Namespace, _SubParsersAction
 from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
@@ -12,9 +12,9 @@ MIN_LENGTH = 5
 PUNCTUATION = string.punctuation.replace("%", "%%")
 
 
-class GenerateString(AbstractOption):
-    """GenerateString Class
-    Subcommand: generate-string
+class Password(AbstractOption):
+    """Password Class
+    Subcommand: password
     Parser Options:
         -l  - length of password
         -s  - what symbol characters to use (default: full punctuation list)
@@ -24,7 +24,7 @@ class GenerateString(AbstractOption):
     """
 
     def get_command_name(self) -> str:
-        return "generate-string"
+        return "password"
 
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
         g = subparser.add_parser(self.get_command_name(), help="Generate a password")

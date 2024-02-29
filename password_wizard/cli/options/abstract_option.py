@@ -13,8 +13,8 @@ class AbstractOption(ABC):
     def get_command_name(self) -> str:
         """Used to get the command name to use for this option
         This should be a single string, with no prefix, that
-        describes the action the option will take, for example:
-        'check' or 'generate-string'.
+        describes the action the option will take, e.g.
+        'check' or 'passphrase'.
         """
 
     @abstractmethod

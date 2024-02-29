@@ -2,14 +2,14 @@ import re
 from unittest import TestCase
 from unittest.mock import patch
 from password_wizard.cli.options.check import Check
-from password_wizard.cli.options.generate_passphrase import GeneratePassphrase
-from password_wizard.cli.options.generate_string import GenerateString
+from password_wizard.cli.options.passphrase import Passphrase
+from password_wizard.cli.options.password import Password
 from password_wizard.cli.cli import get_option_parser
 
 
 class TestCLI(TestCase):
-    def test_generate_string(self) -> None:
-        option = GenerateString()
+    def test_password(self) -> None:
+        option = Password()
         parser = get_option_parser([option])
 
         # Test CLI with no arguments passed
@@ -41,10 +41,10 @@ class TestCLI(TestCase):
             re.search("^This password has been found \\d+ times", output.output)
         )
 
-    @patch("password_wizard.cli.options.generate_passphrase.input", return_value="-")
-    def test_generate_passphrase(self, mock) -> None:
+    @patch("password_wizard.cli.options.passphrase.input", return_value="-")
+    def test_passphrase(self, mock) -> None:
         """Note: mock must be passed in as func arg for mocking purposes, even if not used below"""
-        option = GeneratePassphrase()
+        option = Passphrase()
         parser = get_option_parser([option])
 
         # Test CLI with no arguments passed

@@ -1,4 +1,4 @@
-""" GeneratePassphrase Option - used to generate a passphrase """
+""" Passphrase Option - used to generate a passphrase """
 from argparse import Namespace, _SubParsersAction
 from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
 from password_wizard.utils.passphrase_generator import PassphraseGenerator
@@ -10,9 +10,9 @@ MAX_WORDS = 8
 MIN_WORDS = 3
 
 
-class GeneratePassphrase(AbstractOption):
-    """GeneratePassphrase Class
-    Subcommand: generate-passphrase
+class Passphrase(AbstractOption):
+    """Passphrase Class
+    Subcommand: passphrase
     Parser Options:
         -w  - number of words to use
         -s  - separator to use between words
@@ -22,7 +22,7 @@ class GeneratePassphrase(AbstractOption):
     """
 
     def get_command_name(self) -> str:
-        return "generate-passphrase"
+        return "passphrase"
 
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
         g = subparser.add_parser(self.get_command_name(), help="Generate a passphrase")
