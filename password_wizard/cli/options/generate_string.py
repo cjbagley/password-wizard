@@ -75,14 +75,14 @@ class GenerateString(AbstractOption):
                 )
             generator.set_length(args.length)
         if args.special_chars:
-            chars = self.get_special_char_input()
+            chars = self._get_special_char_input()
             generator.set_special_characters(chars)
         if args.no_special_chars is False:
             generator.set_use_special_characters(args.no_special_chars)
 
         return find_non_leaked_password(generator.generate)
 
-    def get_special_char_input(self) -> str:
+    def _get_special_char_input(self) -> str:
         """Get special characters to use from user input"""
         chars = set()
         for c in input("Special characters to use: "):

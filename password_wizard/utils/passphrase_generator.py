@@ -3,22 +3,26 @@
 import os
 import secrets
 
+DEFAULT_WORD_COUNT = 4
+
 
 class PassphraseGenerator:
     """Used to generate a passphrase based on the class attributes:
-    - words: the number of words to use
+    - words: the number of words to use in the generated passphrase.
+    - separator: character to use between words, if set.
+    Passphrase example: HeresAnExamplePassphrase.
     """
 
     def __init__(self) -> None:
         """Default the options for the generated passphrase"""
-        self._words = 4
+        self._word_count = DEFAULT_WORD_COUNT
         self._separator = ""
 
-    def set_words(self, words: int) -> None:
+    def set_word_count(self, words: int) -> None:
         """Set the number of words to use in the generated passphrase"""
-        self._words = int(words)
+        self._word_count = int(words)
 
-    def set_separator(self, separator: str):
+    def set_separator(self, separator: str) -> None:
         """Set a separator to use between words"""
         if separator == "":
             self._separator = ""
@@ -34,13 +38,13 @@ class PassphraseGenerator:
         path = (
             os.path.dirname(os.path.realpath(__file__)) + "/../wordlists/wordlist.txt"
         )
-        wordlist = self.get_wordlist(path)
+        wordlist = self._get_wordlist(path)
         words = wordlist.lower().split()
         return self._separator.join(
-            secrets.choice(words).title() for _ in range(self._words)
+            secrets.choice(words).title() for _ in range(self._word_count)
         )
 
-    def get_wordlist(self, filepath) -> str:
-        """Load wordlist from given filepath"""
+    def _get_wordlist(self, filepath) -> str:
+        """Load wordlist from given file path"""
         with open(file=filepath, mode="r", encoding="utf-8") as f:
             return f.read()

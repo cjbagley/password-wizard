@@ -1,3 +1,3 @@
 """
-Tests for utils module
+Tests for cli module
 """

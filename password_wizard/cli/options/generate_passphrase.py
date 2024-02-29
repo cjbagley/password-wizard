@@ -61,13 +61,13 @@ class GeneratePassphrase(AbstractOption):
                     exit_code=1,
                     output=f"Words specified must be between {MIN_WORDS} and {MAX_WORDS}",
                 )
-            generator.set_words(args.words)
+            generator.set_word_count(args.words)
         if args.separator:
-            separator = self.get_separator_input()
+            separator = self._get_separator_input()
             generator.set_separator(separator)
 
         return find_non_leaked_password(generator.generate)
 
-    def get_separator_input(self) -> str:
+    def _get_separator_input(self) -> str:
         """Get special characters to use from user input"""
         return input("Separator to use: ")

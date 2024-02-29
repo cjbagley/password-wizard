@@ -2,7 +2,7 @@
 
     Full details of how the API works can be found at:
     https://haveibeenpwned.com/API/v3#SearchingPwnedPasswordsByRange
-    In short summary: it uses k-Anonymity model that allows searching
+    Short summary: it uses k-Anonymity model that allows searching
     previously leaked passwords by the first 5 characters of a SHA-1 hash.
     The password itself is never sent via the API; just the first 5
     characters of the hash. The API returns any matching hashes that
@@ -24,8 +24,8 @@ def _get_matching_hashes(search_hash: str) -> list[str]:
     """Call HIBP API to find any matching hashes
 
     Results from the API come as a text string:
-    {matching hash remainder}:{count of times leaked}\n
-    {matching hash remainder}:{count of times leaked}\n...
+      {matching hash remainder}:{count of times leaked}\n
+      {matching hash remainder}:{count of times leaked}\n...
     """
     search_hash = search_hash.upper()
     _check_search_hash(search_hash, 5)

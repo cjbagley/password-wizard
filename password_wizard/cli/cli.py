@@ -1,6 +1,6 @@
 """ Handle CLI input to determine what action to take
 Options available:
-    - check: This will prompt user to input password to check how many times it has been leaked
+    - check: This will prompt user to input a password to check how many times it has been leaked
     - generate-string: This will randomly generate a password
     - generate-passphrase: This will randomly generate a passphrase
 """

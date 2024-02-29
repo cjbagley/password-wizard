@@ -3,17 +3,23 @@
 import secrets
 import string
 
+DEFAULT_PASSWORD_LENGTH = 18
+
 
 class PasswordGenerator:
     """Used to generate a password based on the class attributes:
-    - length: the length of the password to set
-    - special_char_count: the number of special characters to include
-    in the generated password
+    - length: the length of the password to set.
+    - chr_list: the list of standard characters available
+      for random selection in the generated password.
+    - use_special_chrs: If True, the password will contain special
+      characters.
+    - special_chr_list: the list of special characters available
+      for random selection in the generated password.
     """
 
     def __init__(self) -> None:
         """Default the options for the generated password"""
-        self._length = 18
+        self._length = DEFAULT_PASSWORD_LENGTH
         self._chr_list = string.ascii_letters + string.digits
         self._use_special_chrs = True
         self._special_chr_list = string.punctuation
@@ -27,7 +33,7 @@ class PasswordGenerator:
         self._special_chr_list = chars
 
     def set_use_special_characters(self, should_use: bool) -> None:
-        """Do not use any special characters"""
+        """Set if any special characters should be selected from"""
         self._use_special_chrs = bool(should_use)
 
     def generate(self) -> str:

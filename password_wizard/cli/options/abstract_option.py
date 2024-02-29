@@ -14,12 +14,12 @@ class AbstractOption(ABC):
         """Used to get the command name to use for this option
         This should be a single string, with no prefix, that
         describes the action the option will take, for example:
-        'check'
+        'check' or 'generate-string'.
         """
 
     @abstractmethod
     def add_sub_parser(self, subparser: _SubParsersAction) -> None:
-        """Used to dd this option to argparse subparser.
+        """Used to add this option to argparse subparser.
         First, the command name needs to be set with:
         g = subparser.add_parser(self.get_command_name(), help="...")
         Any sub flags for this option can then be

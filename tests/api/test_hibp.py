@@ -28,7 +28,7 @@ class TestHIBP(TestCase):
         with self.assertRaises(ValueError):
             get_matched_hash_count(HASH_OF_OBSCURE_STRING[:5])
 
-        # Check results are as expected
+        # Check hash count results are as expected
         result = get_matched_hash_count(HASH_OF_WORD_PASSWORD)
         self.assertTrue(result > 0)
         result2 = get_matched_hash_count(HASH_OF_OBSCURE_STRING)
