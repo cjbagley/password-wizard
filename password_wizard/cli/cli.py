@@ -1,8 +1,8 @@
 """ Handle CLI input to determine what action to take
 Options available:
     - check: This will prompt user to input password to check how many times it has been leaked
-    - generate: This will randomly generate a password
-    - gui: This will open the Password Wizard GUI
+    - generate-string: This will randomly generate a password
+    - generate-passphrase: This will randomly generate a passphrase
 """
 import argparse
 import sys
@@ -11,7 +11,6 @@ from password_wizard.cli.options.abstract_option import AbstractOption
 from password_wizard.cli.options.check import Check
 from password_wizard.cli.options.generate_passphrase import GeneratePassphrase
 from password_wizard.cli.options.generate_string import GenerateString
-from password_wizard.cli.options.gui import Gui
 
 
 class ArgumentParser(argparse.ArgumentParser):
@@ -23,7 +22,7 @@ class ArgumentParser(argparse.ArgumentParser):
 
 def get_options() -> list[AbstractOption]:
     """Get a list of the available CLI option classes"""
-    return [Check(), GenerateString(), Gui(), GeneratePassphrase()]
+    return [Check(), GenerateString(), GeneratePassphrase()]
 
 
 def get_option_parser(options: list[AbstractOption]) -> argparse.ArgumentParser:
