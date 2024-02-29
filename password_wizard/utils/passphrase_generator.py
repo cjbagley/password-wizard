@@ -1,5 +1,6 @@
 """ Passphrase Generator - Used to generate a passphrase based on selected options """
 
+import os
 import secrets
 
 
@@ -30,7 +31,10 @@ class PassphraseGenerator:
         Uses the class options to determine what the passphrase
         should contain.
         """
-        wordlist = self.get_wordlist("./../wordlist.txt")
+        path = (
+            os.path.dirname(os.path.realpath(__file__)) + "/../wordlists/wordlist.txt"
+        )
+        wordlist = self.get_wordlist(path)
         words = wordlist.lower().split()
         return self._separator.join(
             secrets.choice(words).title() for _ in range(self._words)
