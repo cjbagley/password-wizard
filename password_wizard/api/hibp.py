@@ -1,16 +1,16 @@
-""" Functions related to interacting with 'Have I Been Pwned' (HIBP) API
+"""Functions related to interacting with 'Have I Been Pwned' (HIBP) API
 
-    Full details of how the API works can be found at:
-    https://haveibeenpwned.com/API/v3#SearchingPwnedPasswordsByRange
-    Short summary: it uses k-Anonymity model that allows searching
-    previously leaked passwords by the first 5 characters of a SHA-1 hash.
-    The password itself is never sent via the API; just the first 5
-    characters of the hash. The API returns any matching hashes that
-    start with those 5 characters (but only the remaining parts of the 
-    full hash string, i.e. they do not have the first 5 characters).
-    The results can then be combined with the original 5 characters locally
-    to find if any combined hash matches the full hash of the password.
-    If a match has been found: that password has been leaked at some point.
+Full details of how the API works can be found at:
+https://haveibeenpwned.com/API/v3#SearchingPwnedPasswordsByRange
+Short summary: it uses k-Anonymity model that allows searching
+previously leaked passwords by the first 5 characters of a SHA-1 hash.
+The password itself is never sent via the API; just the first 5
+characters of the hash. The API returns any matching hashes that
+start with those 5 characters (but only the remaining parts of the
+full hash string, i.e. they do not have the first 5 characters).
+The results can then be combined with the original 5 characters locally
+to find if any combined hash matches the full hash of the password.
+If a match has been found: that password has been leaked at some point.
 """
 
 import re
@@ -21,7 +21,7 @@ HIBP_EXCEPT_MSG = "Error with results given from HIBP API"
 
 
 def _get_matching_hashes(search_hash: str) -> list[str]:
-    """Call HIBP API to find any matching hashes
+    """Call HIBP API to find matching hashes for given search hash
 
     Results from the API come as a text string:
       {matching hash remainder}:{count of times leaked}\n

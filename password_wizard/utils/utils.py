@@ -1,4 +1,4 @@
-""" General utilities module """
+"""General utilities module"""
 
 import hashlib
 

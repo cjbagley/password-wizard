@@ -1,4 +1,5 @@
-""" Check Option - used to compare a given password against 'Have I Been Pwned' list """
+"""Check Option - used to compare a given password against 'Have I Been Pwned' list"""
+
 from argparse import Namespace, _SubParsersAction
 from getpass import getpass
 from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
@@ -7,8 +8,7 @@ from password_wizard.api.hibp import get_matched_hash_count
 
 
 class Check(AbstractOption):
-    """Check Class
-    Subcommand: check
+    """Subcommand: check
     Parser Options:
         - None
     Execute: Ask the user to enter a password. This password is then

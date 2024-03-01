@@ -1,3 +1,5 @@
+"""Tests for passphrase generation"""
+
 from unittest import TestCase
 
 from password_wizard.utils.passphrase_generator import (
@@ -7,13 +9,14 @@ from password_wizard.utils.passphrase_generator import (
 
 
 class TestPassphraseGenerator(TestCase):
-    """Note - no separate test for generate or get_wordlist functions,
-    as the below effectively test these anyway
-    """
+    """Unit tests for passphrase_generator"""
 
     def test_set_word_count(self) -> None:
-        # Test default word count
+        """Test word count can be changed"""
+        # pylint: disable=protected-access
         generator = PassphraseGenerator()
+
+        # Test default word count
         self.assertEqual(DEFAULT_WORD_COUNT, generator._word_count)
 
         # Test a new word count can be set
@@ -25,8 +28,11 @@ class TestPassphraseGenerator(TestCase):
         self.assertNotEqual("", result)
 
     def test_set_separator(self) -> None:
-        # Test defaults to no separator
+        """Test separator can be changed"""
+        # pylint: disable=protected-access
         generator = PassphraseGenerator()
+
+        # Test defaults to no separator
         self.assertEqual("", generator._separator)
 
         # Test a new separator can be set

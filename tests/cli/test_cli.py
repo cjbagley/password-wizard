@@ -1,3 +1,5 @@
+"""Test CLI functionality"""
+
 import re
 from unittest import TestCase
 from unittest.mock import patch
@@ -8,7 +10,10 @@ from password_wizard.cli.cli import get_option_parser
 
 
 class TestCLI(TestCase):
+    """Functionality tests for cli"""
+
     def test_password(self) -> None:
+        """Test password creation CLI argument"""
         option = Password()
         parser = get_option_parser([option])
 
@@ -28,8 +33,10 @@ class TestCLI(TestCase):
             parser.parse_args([option.get_command_name(), "-non-existing", "10"])
 
     @patch("password_wizard.cli.options.check.getpass", return_value="password")
-    def test_check(self, mock) -> None:
-        """Note: mock must be passed in as func arg for mocking purposes, even if not used below"""
+    def test_check(self, mock) -> None:  # pylint: disable=unused-argument
+        """Test check CLI argument
+        Note: mock must be passed in above for mocking to work
+        """
         option = Check()
         parser = get_option_parser([option])
 
@@ -42,8 +49,10 @@ class TestCLI(TestCase):
         )
 
     @patch("password_wizard.cli.options.passphrase.input", return_value="-")
-    def test_passphrase(self, mock) -> None:
-        """Note: mock must be passed in as func arg for mocking purposes, even if not used below"""
+    def test_passphrase(self, mock) -> None:  # pylint: disable=unused-argument
+        """Test passphrase generation CLI argument
+        Note: mock must be passed in above for mocking to work
+        """
         option = Passphrase()
         parser = get_option_parser([option])
 

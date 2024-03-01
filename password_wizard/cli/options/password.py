@@ -1,4 +1,5 @@
-""" Password Option - used to generate a password """
+"""Password Option - used to generate a password"""
+
 import string
 from argparse import Namespace, _SubParsersAction
 from password_wizard.cli.options.abstract_option import AbstractOption, ExecuteResult
@@ -13,8 +14,7 @@ PUNCTUATION = string.punctuation.replace("%", "%%")
 
 
 class Password(AbstractOption):
-    """Password Class
-    Subcommand: password
+    """Subcommand: password
     Parser Options:
         -l  - length of password
         -s  - what symbol characters to use (default: full punctuation list)

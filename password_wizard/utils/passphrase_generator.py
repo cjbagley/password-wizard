@@ -1,4 +1,4 @@
-""" Passphrase Generator - Used to generate a passphrase based on selected options """
+"""Passphrase Generator - Used to generate a passphrase"""
 
 import os
 import secrets
@@ -7,10 +7,10 @@ DEFAULT_WORD_COUNT = 4
 
 
 class PassphraseGenerator:
-    """Used to generate a passphrase based on the class attributes:
-    - words: the number of words to use in the generated passphrase.
-    - separator: character to use between words, if set.
-    Passphrase example: HeresAnExamplePassphrase.
+    """Generate a passphrase based on the following class attributes:
+        - words: the number of words to use in the generated passphrase.
+        - separator: character to use between words, if set.
+    Example passphrase: HeresAnExamplePassphrase.
     """
 
     def __init__(self) -> None:

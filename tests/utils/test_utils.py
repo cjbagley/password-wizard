@@ -1,9 +1,14 @@
+"""Tests for utilities"""
+
 from unittest import TestCase
 from password_wizard.utils.utils import sha1_hash
 
 
 class TestUtils(TestCase):
+    """Unit tests for utils"""
+
     def test_sha1hash(self):
+        """Test sha1 hash function returns expected values"""
         expected = "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8"
         result = sha1_hash("password")
         self.assertEqual(result, expected)

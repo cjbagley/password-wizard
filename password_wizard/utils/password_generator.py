@@ -1,4 +1,4 @@
-""" Password Generator - Used to generate a password based on selected options """
+"""Password Generator - Used to generate a password based on selected options"""
 
 import secrets
 import string
@@ -7,14 +7,15 @@ DEFAULT_PASSWORD_LENGTH = 18
 
 
 class PasswordGenerator:
-    """Used to generate a password based on the class attributes:
-    - length: the length of the password to set.
-    - chr_list: the list of standard characters available
-      for random selection in the generated password.
-    - use_special_chrs: If True, the password will contain special
-      characters.
-    - special_chr_list: the list of special characters available
-      for random selection in the generated password.
+    """Generate a password based on the following class attributes:
+      - length: the length of the password to set.
+      - chr_list: the list of standard characters available
+        for random selection in the generated password.
+      - use_special_chrs: If True, the password will contain special
+        characters.
+      - special_chr_list: the list of special characters available
+        for random selection in the generated password.
+    Example password: k?1d3dS8QQ}X)44cr4
     """
 
     def __init__(self) -> None:

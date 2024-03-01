@@ -1,4 +1,5 @@
-""" Abstract Option - abstract template for other option classes """
+"""Abstract template class for Options"""
+
 from argparse import Namespace, _SubParsersAction
 from abc import ABC, abstractmethod
 from collections import namedtuple
@@ -7,7 +8,7 @@ ExecuteResult = namedtuple("ExecuteResult", ["exit_code", "output"])
 
 
 class AbstractOption(ABC):
-    """AbstractOption class, the base for any CLI option classes"""
+    """A base for all CLI option classes"""
 
     @abstractmethod
     def get_command_name(self) -> str:

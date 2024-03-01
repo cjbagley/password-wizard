@@ -1,3 +1,5 @@
+"""Tests for password generation"""
+
 from unittest import TestCase
 
 from password_wizard.utils.password_generator import (
@@ -7,11 +9,10 @@ from password_wizard.utils.password_generator import (
 
 
 class TestPasswordGenerator(TestCase):
-    """Note - no separate test for generate function,
-    as the below effectively tests this anyway
-    """
+    """Unit tests for password_generator"""
 
     def test_set_length(self) -> None:
+        """Test that the length of the password can be set"""
         generator = PasswordGenerator()
 
         # Test default password length
@@ -22,6 +23,8 @@ class TestPasswordGenerator(TestCase):
         self.assertEqual(len(generator.generate()), 10)
 
     def test_set_special_characters(self) -> None:
+        """Test that special characters to use can be set"""
+        # pylint: disable=protected-access
         generator = PasswordGenerator()
 
         # Test special characters set
@@ -34,13 +37,15 @@ class TestPasswordGenerator(TestCase):
         self.assertNotIn("_", generator._special_chr_list)
 
     def test_use_special_characters(self) -> None:
-        """As 'secrets' module does not use seeds, this
+        """Test special characters can be on/off
+        As 'secrets' module does not use seeds, this
         posses potential issues with testing the use of
         special characters, as it is possible to generate a
         'correct' random password that just happens to not have
         any. To that end, attempt the generation multiple times
         to determine if special characters used or not.
         """
+        # pylint: disable=protected-access,pointless-string-statement
         generator = PasswordGenerator()
         special_chars = set(generator._special_chr_list)
 

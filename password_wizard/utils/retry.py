@@ -1,6 +1,7 @@
 """Helper to call the 'Have I Been Pwned' API x number of retries if
 a generated password shows as having previously been leaked.
 """
+
 from password_wizard.api.hibp import get_matched_hash_count
 from password_wizard.cli.options.abstract_option import ExecuteResult
 from password_wizard.utils.utils import sha1_hash

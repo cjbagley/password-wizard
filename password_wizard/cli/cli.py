@@ -1,9 +1,10 @@
-""" Handle CLI input to determine what action to take
+"""Handle CLI input to determine what action to take
 Options available:
     - check         Input a password to check how many times it has been leaked
     - passphrase    Generate a passphrase
     - password      Generate a password
 """
+
 import argparse
 import sys
 from typing import NoReturn
@@ -14,19 +15,19 @@ from password_wizard.cli.options.password import Password
 
 
 class ArgumentParser(argparse.ArgumentParser):
-    """Custom argument parsing error handling"""
+    """Custom argument parsing error handling, default not user friendly IMO"""
 
     def error(self, message: str) -> NoReturn:
         raise ValueError(f"Error: {message}")
 
 
 def get_options() -> list[AbstractOption]:
-    """Get a list of the available CLI option classes"""
+    """List of the available CLI option classes, so they can be iterated"""
     return [Check(), Passphrase(), Password()]
 
 
 def get_option_parser(options: list[AbstractOption]) -> argparse.ArgumentParser:
-    """Return a argparse parser based on provided options"""
+    """Return a argparse parser with the provided options"""
     parser = ArgumentParser(description="Password Wizard CLI")
     subparsers = parser.add_subparsers(
         dest="subparser_name",
