@@ -1,14 +1,14 @@
 # Password Wizard 
 
 <p>
-    <img alt="MIT Licence Badge" src="https://img.shields.io/badge/Licence-MIT-blue">
-    <img alt="Bandit Badge" src="https://github.com/cjbagley/password-wizard/actions/workflows/bandit.yml">
+    ![MIT Licence Badge](https://img.shields.io/badge/Licence-MIT-blue)
+    ![Bandit Status Badge](https://img.shields.io/badge/Bandit)(https://github.com/cjbagley/password-wizard/actions/workflows/bandit.yml)
 </p>
 
 ## What is it?
 A CLI tool that can:
 
-- Check the [haveibeenpwned.com] (https://haveibeenpwned.com) leaked password list to see if a given password has been leaked
+- Check the [haveibeenpwned.com](https://haveibeenpwned.com) leaked password list to see if a given password has been leaked
 - Generate a password string (which also has no matching records on haveibeenpwned.com)
 - Generate a passphrase (which also has no matching records on haveibeenpwned.com)
 
@@ -97,3 +97,8 @@ options:
                     (default: No separator)
 ```
 
+## Possible Todo Items for future versions
+- Implement a GUI
+- Add ability to point to a different wordlist to use
+- Lookup a password against a list of bad passwords, and do not use if it's on it
+- Guessing game: given two bad passwords, which one has been leaked the most amount of times
