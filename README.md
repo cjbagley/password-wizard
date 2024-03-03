@@ -1,17 +1,19 @@
 # Password Wizard 
 
 
-![MIT Licence Badge](https://img.shields.io/badge/Licence-MIT-blue)
-[![Bandit Status Badge](https://img.shields.io/badge/Bandit-green)](https://github.com/cjbagley/password-wizard/actions/workflows/bandit.yml)
+![MIT Licence Badge](https://img.shields.io/badge/Licence-MIT-navy)
+[![Bandit Badge](https://img.shields.io/badge/Bandit-Security?style=flat&label=Security&labelColor=58525B&color=%2303491D)](https://github.com/cjbagley/password-wizard/actions/workflows/bandit.yml)
+[![Pylint Badge](https://img.shields.io/badge/Pylint-Linting?style=flat&label=Linting&labelColor=58525B&color=%2303491D)](https://github.com/cjbagley/password-wizard/actions/workflows/pylint.yml)
+[![Ruff Badge](https://img.shields.io/badge/Ruff-Formatting?style=flat&label=Formatting&labelColor=58525B&color=%2303491D)](https://github.com/cjbagley/password-wizard/actions/workflows/ruff.yml)
 
 ## What is it?
 A CLI tool that can:
 
 - Check the [haveibeenpwned.com](https://haveibeenpwned.com) leaked password list to see if a given password has been leaked
-- Generate a password string (which also has no matching records on haveibeenpwned.com)
-- Generate a passphrase (which also has no matching records on haveibeenpwned.com)
+- Generate a password string (with no matching records on [haveibeenpwned.com](https://haveibeenpwned.com))
+- Generate a passphrase (with no matching records on [haveibeenpwned.com](https://haveibeenpwned.com))
 
-The aim of this tool was to learn some python (as I've primarily been a PHP developer) but also to make something I would use myself.
+The aim of creating this tool was to practice python (as I'm primarily a PHP developer) whilst also making something that I would use myself.
 
 ## Sounds good, how do I use it?
 
@@ -97,7 +99,8 @@ options:
 ```
 
 ## Possible Todo Items for future versions
+- Figure out how to properly package it
 - Implement a GUI
 - Add ability to point to a different wordlist to use
-- Lookup a password against a list of bad passwords, and do not use if it's on it
-- Guessing game: given two bad passwords, which one has been leaked the most amount of times
+- Lookup a password against a list of bad passwords, and do not use if it's on the list
+- Add a 'higher or lower' game: given two bad passwords, guess which of the two has been leaked the most amount of times
