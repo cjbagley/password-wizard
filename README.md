@@ -1,9 +1,8 @@
 # Password Wizard 
 
-<p>
-    ![MIT Licence Badge](https://img.shields.io/badge/Licence-MIT-blue)
-    ![Bandit Status Badge](https://img.shields.io/badge/Bandit)(https://github.com/cjbagley/password-wizard/actions/workflows/bandit.yml)
-</p>
+
+![MIT Licence Badge](https://img.shields.io/badge/Licence-MIT-blue)
+[![Bandit Status Badge](https://img.shields.io/badge/Bandit-green)](https://github.com/cjbagley/password-wizard/actions/workflows/bandit.yml)
 
 ## What is it?
 A CLI tool that can:
