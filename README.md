@@ -15,6 +15,21 @@ A CLI tool that can:
 
 The aim of creating this tool was to practice python (as I'm primarily a PHP developer) whilst also making something that I would use myself.
 
+## How is the password checked?
+The password is checked using the [haveibeenpwned.com API](https://haveibeenpwned.com/API/v3#PwnedPasswords).
+
+## Wait, you are sending the password to another website? Isn't that a really bad idea?
+Don't worry - no passwords are sent anywhere!
+
+## So how do you check it then?
+The link below has more information, but the short version: it uses something called the 'k-Anonymity model' to search previously leaked passwords by the first 5 characters of a *hash* of the password, not the password itself.
+The password is hashed locally with a SHA-1 hash, and then only the first 5 characters of the hash are sent to the [haveibeenpwned.com](https://haveibeenpwned.com) API.
+The API returns any matching hashes that start with those 5 characters (but only the remaining parts of the full hash string, i.e. they do not have the first 5 characters).
+The results can then be combined with the original 5 characters locally to find if any combined hash matches the full hash of the password.
+If a match has been found: that password has been leaked at some point.
+
+More details [here](https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/).
+
 ## Sounds good, how do I use it?
 
 1. Download the source code or clone the repository.
